@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
   // TODO: Check if included .asm extension, if not, then append it!
   const string fileName = (string)argv[1];
 
-  cout << "About to read the file \"" << fileName << "\"..." << endl;
+  cout << endl << "About to read the file \"" << fileName << "\"..." << endl;
 
   ifstream inputFile(fileName);
 
@@ -46,15 +46,26 @@ int main(int argc, char** argv) {
   cout << "The file was read" << endl << endl;
 
   enum Tasks { indentation, verticalAlignment, complete };
+  int enumCount = 0;
+  for (int task = indentation; task != complete; task++) {
+    enumCount++;
+  }
+
+  string taskToString[enumCount];
+  taskToString[indentation] = "indentation";
+  taskToString[verticalAlignment] = "verticalAlignment";
+  taskToString[complete] = "complete";
 
   // perform operations based on array's contents
   for (int task = indentation; task != complete; task++) {
+    cout << "Performing task: " << taskToString[task] << endl;
+
     // Go through every line
     // for (size_t i{}; i < contents.size(); i++) {
     // }
   }
 
-  cout << "Beautification complete..." << endl;
+  cout << endl << "Beautification complete..." << endl;
 
   return 0;
 }
