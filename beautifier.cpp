@@ -11,7 +11,12 @@ using std::string;
 using std::to_string;
 
 int main(int argc, char** argv) {
-  const string fileName = (argc > 1) ? ((string)argv[1]) : "fileName";
+  if (argc < 2) {  // No name argument was supplied
+    cout << "Error code: \"Id10t\"\n  No filename was supplied" << endl;
+    return 0;
+  }
+
+  const string fileName = (string)argv[1];
 
   cout << "About to read the file \"" << fileName << "\"" << endl;
 
