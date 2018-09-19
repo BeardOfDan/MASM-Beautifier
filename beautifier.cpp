@@ -45,20 +45,38 @@ int main(int argc, char** argv) {
 
   cout << "The file was read" << endl << endl;
 
-  enum Tasks { indentation, verticalAlignment, complete };
-  int enumCount = 0;
-  for (int task = indentation; task != complete; task++) {
-    enumCount++;
-  }
+  enum Tasks {
+    indentation = 0,
+    verticalAlignment = 1,
+    labelLeftAlign = 2,
+    opcodeIndent = 3,
+    alignFirstOperands = 4,
+    alignComments = 5,
+    upperCaseConstants = 6,
+    lowerCaseDataLabels = 7,
+    warnUncommentedCode = 8,
+    complete = 9
+  };
 
-  string taskToString[enumCount];
+  string taskToString[complete + 1];
+
   taskToString[indentation] = "indentation";
   taskToString[verticalAlignment] = "verticalAlignment";
+  taskToString[labelLeftAlign] = "labelLeftAlign";
+  taskToString[opcodeIndent] = "opcodeIndent";
+  taskToString[alignFirstOperands] = "alignFirstOperands";
+  taskToString[alignComments] = "alignComments";
+  taskToString[upperCaseConstants] = "upperCaseConstants";
+  taskToString[lowerCaseDataLabels] = "lowerCaseDataLabels";
+  taskToString[warnUncommentedCode] = "warnUncommentedCode";
   taskToString[complete] = "complete";
 
   // perform operations based on array's contents
   for (int task = indentation; task != complete; task++) {
     cout << "Performing task: " << taskToString[task] << endl;
+
+    // Likely break each task out into a funciton
+    // then execute function based on switch statement of task
 
     // Go through every line
     // for (size_t i{}; i < contents.size(); i++) {
