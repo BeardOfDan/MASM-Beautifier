@@ -5,10 +5,20 @@
 #include <iostream>
 using std::cout;
 using std::endl;
+using std::getline;
+
+#include <sstream>
+using std::istringstream;
 
 #include <string>
 using std::string;
 using std::to_string;
+
+#include <fstream>
+using std::ifstream;
+
+#include <vector>
+using std::vector;
 
 int main(int argc, char** argv) {
   if (argc < 2) {  // No name argument was supplied
@@ -16,9 +26,35 @@ int main(int argc, char** argv) {
     return 0;
   }
 
+  // TODO: Check if included .asm extension, if not, then append it!
   const string fileName = (string)argv[1];
 
-  cout << "About to read the file \"" << fileName << "\"" << endl;
+  cout << "About to read the file \"" << fileName << "\"..." << endl;
+
+  ifstream inputFile(fileName);
+
+  // put each line of the file into the string vector 'contents'
+  string line{};
+  vector<string> contents;
+
+  while (getline(inputFile, line)) {
+    contents.push_back(line);
+  }
+
+  inputFile.close();
+
+  cout << "The file was read" << endl << endl;
+
+  enum Tasks { indentation, verticalAlignment, complete };
+
+  // perform operations based on array's contents
+  for (int task = indentation; task != complete; task++) {
+    // Go through every line
+    // for (size_t i{}; i < contents.size(); i++) {
+    // }
+  }
+
+  cout << "Beautification complete..." << endl;
 
   return 0;
 }
