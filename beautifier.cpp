@@ -18,6 +18,9 @@ using std::ifstream;
 using std::vector;
 
 int getEndOfBlock(vector<string> contents, int currentLine);
+bool isBlankLine(string line);
+string getToken(string line, int tokenNumber = 0);
+vector<string> tokenizeString(string str, char delimiter = ' ');
 
 int main(int argc, char** argv) {
   if (argc < 2) {  // No name argument was supplied
@@ -91,6 +94,54 @@ int main(int argc, char** argv) {
 // This is for handling indentations and vertical alignment
 // In the event of an issue (ex. called outside of a procedure) returns -1
 int getEndOfBlock(vector<string> contents, int currentLine) {
-  return -1;
-  // TODO: Implement this function
+  int i = 0;
+  while ((!isBlankLine(contents[currentLine + i])) &&
+         (getToken(contents[currentLine + i]) != "end")) {
+    i++;
+  }
+
+  return currentLine + i;
+}
+
+// returns true if it's a blank line
+bool isBlankLine(string line) {
+  for (int i = 0; i < line.length(); i++) {
+    if (line[i] != ' ') {
+      return false;
+    }
+  }
+  return true;
+}
+
+// returns token (space delimited)
+string getToken(string line, int tokenNumber) {
+  vector<string> tokens = tokenizeString(line);
+
+  if (tokenNumber >= tokens.size()) {  // safeguard
+    return tokens[tokens.size() - 1];
+  }
+
+  return tokens[tokenNumber];
+}
+
+vector<string> tokenizeString(string str, char delimiter) {
+  vector<string> tokens;
+
+  // re-usable index for start of token
+  int start = -1;
+
+  for (int i = 0; i < str.length(); i++) {
+    if (str[i] != delimiter) {
+      if (start != -1) {  // looking for new token
+        start = i;
+      }
+
+      continue;  // parse the rest of the token
+    }
+
+    tokens.push_back(str.substr(start, i));
+    start = -1;  // reset start index
+  }
+
+  return tokens;
 }
