@@ -89,7 +89,8 @@ int main(int argc, char** argv) {
 
 // Returns the line number for the last line of the current code block
 // This is for handling indentations and vertical alignment
+// In the event of an issue (ex. called outside of a procedure) returns -1
 int getEndOfBlock(vector<string> contents, int currentLine) {
-  return currentLine;
+  return -1;
   // TODO: Implement this function
 }
