@@ -7,9 +7,6 @@ using std::cout;
 using std::endl;
 using std::getline;
 
-#include <sstream>
-using std::istringstream;
-
 #include <string>
 using std::string;
 using std::to_string;
@@ -19,6 +16,8 @@ using std::ifstream;
 
 #include <vector>
 using std::vector;
+
+int getEndOfBlock(vector<string> contents, int currentLine);
 
 int main(int argc, char** argv) {
   if (argc < 2) {  // No name argument was supplied
@@ -86,4 +85,11 @@ int main(int argc, char** argv) {
   cout << endl << "Beautification complete..." << endl;
 
   return 0;
+}
+
+// Returns the line number for the last line of the current code block
+// This is for handling indentations and vertical alignment
+int getEndOfBlock(vector<string> contents, int currentLine) {
+  return currentLine;
+  // TODO: Implement this function
 }
